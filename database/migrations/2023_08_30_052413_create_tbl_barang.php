@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('tbl_barang', function (Blueprint $table) {
             // $table->id();
-            $table->bigIncrements('idBarang');
+            $table->id();
             $table->string('namaBarang', 250);
             $table->string('deskripsiBarang', 250);
             $table->integer('harga');

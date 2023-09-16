@@ -14,67 +14,7 @@ class barangController extends Controller
         $datas = DB::table('tbl_barang')->get();
         return view('layout/app')->with('datas', $datas);
     }
-    public function apiIndex()
-    {
-        $datas = DB::table('tbl_barang')->get();
-        return response()->json($datas);
-    }
-    public function apiStore(Request $request)
-    {
-        // Validate the incoming JSON data
-        $validatedData = $request->validate([
-            'namaBarang' => 'required|string|max:255',
-            'deskripsiBarang' => 'required|string|max:255',
-            'harga' => 'required|numeric',
-        ]);
 
-        // Create a new record using the validated data
-        $newData = barang::create([
-            'namaBarang' => $validatedData['namaBarang'],
-            'deskripsiBarang' => $validatedData['deskripsiBarang'],
-            'harga' => $validatedData['harga'],
-        ]);
-
-        // Return a JSON response with the newly created data and a 201 status code
-        return response()->json(['message' => 'Data barang berhasil ditambahkan', 'data' => $newData], 201);
-    }
-    public function apiUpdate(Request $request, $idBarang)
-    {
-        // Temukan data barang berdasarkan ID
-        $barang = barang::find($idBarang);
-
-        // Validasi data JSON yang masuk
-        $validasi = $request->validate([
-            'namaBarang' => 'required|string|max:255',
-            'deskripsiBarang' => 'required|string|max:255',
-            'harga' => 'required|numeric',
-        ]);
-
-        // Perbarui data barang sesuai dengan data yang validasi
-        $barang->namaBarang = $validasi['namaBarang'];
-        $barang->deskripsiBarang = $validasi['deskripsiBarang'];
-        $barang->harga = $validasi['harga'];
-        $barang->save();
-
-        // Kembalikan respons dengan pesan sukses
-        return response()->json(['message' => 'Data barang berhasil diperbarui', 'data' => $barang]);
-    }
-    public function apiDelete($idBarang)
-    {
-        // Temukan data barang berdasarkan ID
-        $barang = barang::find($idBarang);
-
-        // Jika data barang tidak ditemukan, kembalikan respons dengan status 404
-        if (!$barang) {
-            return response()->json(['message' => 'Data barang tidak ditemukan'], 404);
-        }
-
-        // Hapus data barang
-        $barang->delete();
-
-        // Kembalikan respons dengan pesan sukses
-        return response()->json(['message' => 'Data barang berhasil dihapus']);
-    }
     public function login()
     {
         return view('layout/login');

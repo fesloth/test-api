@@ -34,7 +34,3 @@ Route::get('/barang/edit/{id}', [BarangController::class, 'edit'])->name('barang
 Route::put('/barang/update/{id}', [BarangController::class, 'update'])->name('barang.update');
 Route::delete('/barang/delete/{idBarang}', [barangController::class, 'delete'])->name('barang.hapus');
 
-Route::get('/apibarang', [barangController::class, 'apiIndex']);
-Route::post('/apibarang', [barangController::class, 'apiStore']);
-Route::put('/apibarang/{idBarang}', [barangController::class, 'apiUpdate']);
-Route::delete('/apibarang/{idBarang}', [barangController::class, 'apiDelete']);

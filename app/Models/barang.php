@@ -9,8 +9,5 @@ class barang extends Model
 {
     use HasFactory;
     protected $table = "tbl_barang";
-    protected $guarded = [];
-    protected $except = [
-        '/apibarang',
-    ];
+    protected $guarded = ['idBarang'];
 }
